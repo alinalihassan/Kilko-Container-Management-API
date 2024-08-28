@@ -1,0 +1,5 @@
+BASE_URL = "https://mykliko.klikocontainermanager.com/MyKliko"
+BALANCE_ENDPOINT = "getMyBalance"
+LOGIN_ENDPOINT = "loginWithPassword"
+CONFIG_ENDPOINT = "getAuthenticatedConfiguration"
+EVENTS_ENDPOINT = "listMyEvents"

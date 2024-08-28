@@ -1,3 +1,5 @@
+from typing import List
+
 from dotenv import dotenv_values
 from kilko_waste import (
     login_request,
@@ -8,6 +10,8 @@ from kilko_waste import (
     AuthenticatedRequest,
     EnvConfig,
 )
+from kilko_waste.definitions.config_response import ConfigResponse
+from kilko_waste.definitions.events_response import Event
 
 APP_URL = "mykliko.kcm.com"
 CLIENT_NAME = "Ouder Amstel"
@@ -21,7 +25,7 @@ class KilkoClient:
     def __init__(self) -> None:
         self.logged_in = False
 
-    def login(self, user: str, password: str):
+    def login(self, user: int, password: str):
         body = LoginRequest(user, password, APP_URL, CLIENT_NAME)
         response = login_request(body)
         self.logged_in = True
@@ -30,9 +34,10 @@ class KilkoClient:
         # DEBUG
         print(response.to_dict())
 
-    def balance(self) -> int:
+    def balance(self) -> float:
         if not self.logged_in:
-            return "You must be logged in!"
+            print("You must be logged in!")
+            raise Exception
         body = AuthenticatedRequest(APP_URL, self.token)
         response = balance_request(body)
 
@@ -42,15 +47,17 @@ class KilkoClient:
     def containers(self):
         raise NotImplementedError
 
-    def configuration(self):
+    def configuration(self) -> ConfigResponse:
         if not self.logged_in:
-            return "You must be logged in!"
+            print("You must be logged in!")
+            raise Exception
         body = AuthenticatedRequest(APP_URL, self.token)
         return config_request(body)
 
-    def events(self):
+    def events(self) -> List[Event]:
         if not self.logged_in:
-            return "You must be logged in!"
+                print("You must be logged in!")
+                raise Exception
         body = AuthenticatedRequest(APP_URL, self.token)
         return events_request(body)
 

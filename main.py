@@ -31,9 +31,6 @@ class KilkoClient:
         self.logged_in = True
         self.token = response.token
 
-        # DEBUG
-        print(response.to_dict())
-
     def balance(self) -> float:
         if not self.logged_in:
             print("You must be logged in!")

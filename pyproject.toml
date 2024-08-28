@@ -1,6 +1,7 @@
 [project]
 name = "kilko-waste"
-version = "0.1.0"
+authors = [{ name = "Alin Ali Hassan", email = "alinalihassan@gmail.com" }]
+version = "0.1.1"
 description = "Kilko Container Management API Client"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -10,6 +11,9 @@ dependencies = [
     "python-dateutil>=2.9.0.post0",
     "dotenv",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/alinalihassan/Kilko-Container-Management-API"
 
 [build-system]
 requires = ["hatchling"]
